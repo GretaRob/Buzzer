@@ -1,0 +1,81 @@
+:root {
+  --muted-color: rgba(255, 255, 255, 0.5);
+}
+
+body {
+  background: #15202b;
+  color: var(--muted-color);
+  margin-top: 5rem;
+}
+
+h3 {
+  color: var(--muted-color);
+}
+
+.content-section {
+  padding: 10px 10px;
+  margin-bottom: 20px;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+a {
+  color: white;
+  text-underline: none;
+  text-decoration: none !important;
+}
+a:hover {
+  color: #00fbd7;
+  text-underline: none !important;
+}
+
+article {
+  border-radius: 4px;
+}
+
+.white-important {
+  color: white;
+  font-weight: bold;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn-outline-primary {
+  border-color: white;
+  color: white !important;
+  padding: 12px 80px 12px 80px;
+  font-weight: bold;
+  background-color: #1da1f2;
+  border: 0;
+  border-radius: 25px;
+}
+
+.btn:active,
+.btn-outline-primary:hover {
+  color: #00fbd7 !important;
+  background-color: #36405e !important;
+  border-color: #00fbd7 !important;
+}
+
+textarea:focus,
+input:focus {
+  box-shadow: 0 0 0 0 !important;
+  border-color: #00fbd7 !important;
+  color: white !important;
+}
+
+.pointer-cur {
+  cursor: pointer;
+}
+
+.hovered-tweet:hover {
+  -webkit-transition: background-color ease-in-out 0.2s;
+  -webkit-transition: border ease-in-out 0.2s;
+  background-color: #2d3741 !important;
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 20px;
+}
