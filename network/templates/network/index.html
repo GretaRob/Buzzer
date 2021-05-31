@@ -3,7 +3,38 @@
 {% block body %}
     TODO
     <div class="row">
-        
+        <div class="col-12 col-md-3 pr-4 dont-move">
+            <a href="/"> <h2><img class="img-fluid" width="60" src="">Buzzer</h2></a><br>
+            <div class="profile-section">
+            <h3 class="white-important p-2">
+                Profile
+            </h3>
+            <article class="media content-section" style="height: 140px; width: 100%">
+                    <div class="mt-2 d-flex full-width align-items-center">
+                        <img
+                           class="rounded-circle mr-3"
+                           style="width: 90px; height: 90px;"
+                           src="">
+                        <div>
+                            <h4 style="text-align: left" class="white-important">
+                                {{ user.username }}
+                            </h4>
+                        </div>
+                    </div>
+            </article>
+            <article class="media content-section">
+                <div class="row full-width pl-2">
+                    <div class="col-6">
+                            Followers
+                    </div>
+                    <div class="col-6">
+                            Following
+                    </div>
+                    
+                </div>
+            </article>
+            </div>
+        </div>
         <!-- Create Post Here -->
         <div class="col-12 col-md-6">
             <h3 class="white-important">
@@ -28,7 +59,7 @@
                        <div
                                style="padding-left: 0px !important;"
                                class="col-8 no-padding d-flex align-items-center">
-                           <a class="mr-2 white-important" href="">
+                           <a class="mr-2 white-important" href="{% url 'profile' username=post.author %}">
                                {{ post.author }}
                            </a>
                        </div>
