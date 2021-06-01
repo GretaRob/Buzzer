@@ -4,15 +4,10 @@
 
 
 <div class="profile">
-    {% if profileuser.first_name and profileuser.last_name %}
-    <h4 class="details-name">{{profileuser.first_name|title}} {{profileuser.last_name|title}}
-    {% else %}   
     <h4 class="details-name">{{profileuser.username|title}}</h4>
-    {% endif %}  
-    </h4>
     <p><span class="btn-total-follow">{{posts}} Posts </span>
-        <button type="button" class="btn-total-follow follows" data-toggle="modal" data-target="#followers">{{totalfollower}} Followers </button>
-        <button type="button" class="btn-total-follow follows" data-toggle="modal" data-target="#following">{{totalfollowing}} Following </button>
+        <button type="button" class="btn-total-follow follows" >{{totalfollower}} Followers </button>
+        <button type="button" class="btn-total-follow follows" >{{totalfollowing}} Following </button>
     </p>
     {% if user.username != profileuser.username %}
         {% if not followingEachOther %}
@@ -32,7 +27,7 @@
     </div>
     {% endif %}
 </div>
-  <div class="modal fade" id="followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -43,14 +38,14 @@
         </div>
         <div class="modal-body">
         {% for follow in follower %}
-        <p class="card-header"><a href="{% url 'profile' username=follow.follower %}">{{follow.follower|title}}</a></p>
+        <p class="card-header"><a href="">{{follow.target|title}}</a></p>
         {% endfor %}
         </div>
       </div>
     </div>
-  </div>
+</div>
 
-  <div class="modal fade" id="following" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -61,7 +56,7 @@
         </div>
         <div class="modal-body">
         {% for follow in following %}
-        <p class="card-header"><a href="{% url 'profile' username=follow.target %}">{{follow.target|title}}</a></p>
+        <p class="card-header"><a href="">{{follow.follow|title}}</a></p>
         {% endfor %}
         </div>
       </div>

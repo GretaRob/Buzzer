@@ -21,6 +21,10 @@ h3 {
   padding: 0 !important;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 a {
   color: white;
   text-underline: none;
@@ -78,4 +82,16 @@ input:focus {
   background-color: #2d3741 !important;
   border: 1px solid rgba(255, 255, 255, 1);
   border-radius: 20px;
+}
+
+.profile-section {
+  background-color: #2d3741;
+  padding: 5px;
+  border-radius: 25px;
+}
+
+.scrollable {
+  overflow-y: auto;
+  border-left: 1px solid #2d3741;
+  border-right: 1px solid #2d3741;
 }
