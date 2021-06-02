@@ -44,7 +44,8 @@ def profile(request, username):
             totalfollowing = len(following)
 
             context = {
-                'posts': posts.count(),
+                'posts': posts,
+                'posts_count': posts.count(),
                 'profileuser': profileuser,
                 'follower': follower,
                 'totalfollower': totalfollower,

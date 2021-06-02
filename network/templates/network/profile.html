@@ -1,69 +1,150 @@
-{% extends 'network/layout.html' %}
+{% extends "network/layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
+    <div class="row">
+        <div class="col-12 col-md-3 pr-4 dont-move">
+            <a href="/"> <h2><img class="img-fluid" width="60" src="">Buzzer</h2></a><br>
+            <div class="profile-section">
+            <article class="media content-section">
+                <div class="row full-width pl-2">
+                    <div class="col-6">
+                        <h3 class="white-important p-2">
+                            Profile
+                        </h3>
+                    </div>
+                    <div class="col-6">
+                        {% if user.username != profileuser.username %}
+                            {% if not followingEachOther %}
+                            <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
+                                {% csrf_token %}
+                                <button class="btn-follow btn" type="submit" value="Follow"><i class="fa fa-user-plus"></i></button>
+                            </form>
+                            {% elif followingEachOther %}
+                            <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
+                                {% csrf_token %}
+                                <button class="btn-follow btn" type="submit" value="Unfollow"><i class="fa fa-user-times"></i></button>
+                            </form>
+                            {% endif %}
+                        {% else %}
+                        <div class="text-right">
+                            <a class="btn-config btn" href=""><i class="fa fa-cog"></i></a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+           
+            <article class="media content-section" style="height: 140px; width: 100%">
+                    <div class="mt-2 d-flex full-width align-items-center">
+                        <i class="far fa-user-circle fa-7x rounded-circle mr-3 img-fluid"></i>
+                        <div>
+                            <h4 style="text-align: left" class="white-important">
+                                {{ profileuser.username|title }}<br>has written<br>
+                            <span class="btn-total-follow">{{posts_count}} Posts </span>
+                            </h4>
+                        </div>
+                    </div>
+            </article>
+            <article class="media content-section">
+                <div class="row full-width pl-2">
+                    <div class="col-6">
+                            Followers
+                    </div>
+                    <div class="col-6">
+                            Following
+                    </div>
+                    <div class="col-6">
+                        <h3 class="white-important follow-click">
+                               {{ totalfollower }} 
+                        </h3>
+                    </div>
+                     <div class="col-6">
+                            <h3 class="white-important follow-click">
+                                {{ totalfollowing }}
+                            </h3>
+                    </div>
+                </div>
+            </article>
+            </div>
+        </div>
+        <!-- User Posts Here -->
+        <div class="col-12 col-md-6 scrollable" >
+            <div class="full-width row">
+                <div class="col-6">
+                    <h3 class="white-important mb-3">
+                        Buzzes
+                    </h3>
+                </div>
+                 <div class="col-6 no-padding">
+                    <h6
+                            style="position: absolute; bottom: 0; right: 0"
+                            class="white-important mb-3">
+                        number
+                    </h6>
+                </div>
+            </div>
+            {% for post in posts %}
+                <article class="media content-section hovered-tweet">
+                <div style="width: 100%; word-break: break-all;">
 
+                    <div class="pb-2 row m-0" style="width: 100%; margin-right: 0 !important;">
+                       <div
+                               style="padding-left: 0px !important;"
+                               class="col-8 no-padding d-flex align-items-center">
+                           <a class="mr-2 white-important" href="{% url 'profile' username=post.author %}">
+                               {{ post.author }}
+                           </a>
+                       </div>
+                       <div class="col-4 d-flex flex-row-reverse no-padding align-items-center"
+                            style="padding-right: 0 !important;">
+                           {% if post.author == user %}
+                                <a class="material-icons ml-2"
+                                   style="font-size: 14px"
+                                        href="">clear</a>
+                                <a class="material-icons ml-2"
+                                   style="font-size: 14px"
+                                        href="">update</a>
+                            {%  endif %}
+                       </div>
+                   </div>
+                    <div
+                            class="mb-2"
+                            style="width: 100%; height: 1px; background-color: rgba(255, 255, 255, 0.1)"></div>
+                    <a
+                            style="color: rgba(255, 255, 255, 0.5) !important;"
+                            href="">
+                        <p class="mb-4">
+                            {{ post.content }}
+                        </p>
+                    </a>
 
-<div class="profile">
-    <h4 class="details-name">{{profileuser.username|title}}</h4>
-    <p><span class="btn-total-follow">{{posts}} Posts </span>
-        <button type="button" class="btn-total-follow follows" >{{totalfollower}} Followers </button>
-        <button type="button" class="btn-total-follow follows" >{{totalfollowing}} Following </button>
-    </p>
-    {% if user.username != profileuser.username %}
-        {% if not followingEachOther %}
-        <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
-            {% csrf_token %}
-            <button class="btn-follow btn" type="submit" value="Follow"><i class="fa fa-user-plus"></i></button>
-        </form>
-        {% elif followingEachOther %}
-        <form class="text-right" method="post" action="{% url 'profile' username=profileuser.username %}">
-            {% csrf_token %}
-            <button class="btn-follow btn" type="submit" value="Unfollow"><i class="fa fa-user-times"></i></button>
-        </form>
-        {% endif %}
-    {% else %}
-    <div class="text-right">
-        <a class="btn-config btn" href=""><i class="fa fa-cog"></i></a>
+                        <div class="row">
+                            <div class="col-6" style="display: flex;">
+                                <small style="opacity: 0.4;">
+
+                                    <!-- Like Button Here -->
+                                    <a href="#" ><i class="fas fa-thumbs-up"></i></a> {{post.likes}}   
+
+                                </small>
+                            </div>
+                            <div class="col-6">
+                                <small
+                                        style="opacity: 0.4;"
+                                    class="white-important d-flex full-width flex-row-reverse">
+                                    {{ post.date_posted | date:"H:i l, d.m.y" }}
+                                </small>
+                            </div>
+                        </div>
+
+                </div>
+                </article>
+            {% endfor %}
+            
+        </div>
+        <!-- Empty Here (put a bigger logo)-->
+        <div class="col-12 col-md-3 dont-move">
+
+        </div>
     </div>
-    {% endif %}
-</div>
-<div >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title details-name" id="exampleModalLongTitle">Total Followers: {{totalfollower}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        {% for follow in follower %}
-        <p class="card-header"><a href="">{{follow.target|title}}</a></p>
-        {% endfor %}
-        </div>
-      </div>
-    </div>
-</div>
-
-  <div >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title details-name" id="exampleModalLongTitle">Total Following: {{totalfollowing}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        {% for follow in following %}
-        <p class="card-header"><a href="">{{follow.follow|title}}</a></p>
-        {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-
- <!-- Posts-->
-
 
 {% endblock %}

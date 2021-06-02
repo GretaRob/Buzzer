@@ -22,3 +22,5 @@ class Follow(models.Model):
     target = models.ForeignKey(
         User, on_delete=CASCADE, related_name='followers')
     follow = models.ForeignKey(User, on_delete=CASCADE, related_name='targets')
+
+    

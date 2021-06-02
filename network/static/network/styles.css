@@ -25,12 +25,14 @@ h3 {
   margin: 0 !important;
 }
 
-a {
+a,
+.btn-follow {
   color: white;
   text-underline: none;
   text-decoration: none !important;
 }
-a:hover {
+a:hover,
+.btn-follow:hover {
   color: #00fbd7;
   text-underline: none !important;
 }
