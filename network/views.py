@@ -106,6 +106,19 @@ def profile(request, username):
 
             return render(request, "network/profile.html", context)
 
+def following(request):
+    posts = Post.objects.all()
+    currentuser = request.user
+    followingposts = []
+    for post in posts:
+        if post.author != currentuser:
+            followingposts.append(post)
+
+    context = {
+        'followingposts': followingposts
+    }
+
+    return render(request, "network/following.html", context)
 
 def login_view(request):
     if request.method == "POST":
