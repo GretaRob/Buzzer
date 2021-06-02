@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.core.paginator import Paginator
 from .forms import PostForm
 from .models import Post, User, Follow
 
@@ -20,9 +21,15 @@ def index(request):
             post.author = user
             post.save()
             return HttpResponseRedirect(reverse("index"))
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'posts': posts,
-        'form': form
+        'form': form,
+        'paginator': paginator,
+        'page_obj': page_obj
     }
     return render(request, "network/index.html", context)
 
@@ -43,6 +50,10 @@ def profile(request, username):
             totalfollower = len(follower)
             totalfollowing = len(following)
 
+            paginator = Paginator(posts, 3)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+
             context = {
                 'posts': posts,
                 'posts_count': posts.count(),
@@ -51,7 +62,9 @@ def profile(request, username):
                 'totalfollower': totalfollower,
                 'following': following,
                 'totalfollowing': totalfollowing,
-                'followingEachOther': following_each_other
+                'followingEachOther': following_each_other,
+                'paginator': paginator,
+                'page_obj': page_obj
             }
 
             return render(request, "network/profile.html", context)
@@ -63,6 +76,9 @@ def profile(request, username):
             author=profileuser).order_by('id').reverse()
         following_each_other = Follow.objects.filter(
             follow=request.user, target=profileuser)
+        paginator = Paginator(posts, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
         if not following_each_other:
             follow = Follow.objects.create(
@@ -82,7 +98,9 @@ def profile(request, username):
                 'following': following,
                 'totalfollowing': totalfollowing,
                 'totalfollower': totalfollower,
-                'followingEachOther': following_each_other
+                'followingEachOther': following_each_other,
+                'paginator': paginator,
+                'page_obj': page_obj
             }
 
             return render(request, "network/profile.html", context)
@@ -101,10 +119,13 @@ def profile(request, username):
                 'following': following,
                 'totalfollowing': totalfollowing,
                 'totalfollower': totalfollower,
-                'followingEachOther': following_each_other
+                'followingEachOther': following_each_other,
+                'paginator': paginator,
+                'page_obj': page_obj
             }
 
             return render(request, "network/profile.html", context)
+
 
 def following(request):
     posts = Post.objects.all()
@@ -113,12 +134,18 @@ def following(request):
     for post in posts:
         if post.author != currentuser:
             followingposts.append(post)
+    paginator = Paginator(followingposts, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'followingposts': followingposts
+        'followingposts': followingposts,
+        'paginator': paginator,
+        'page_obj': page_obj
     }
 
     return render(request, "network/following.html", context)
+
 
 def login_view(request):
     if request.method == "POST":
