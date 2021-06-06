@@ -14,8 +14,10 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name='authors')
     likes = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.content
+    def serialize(self):
+        return {
+            "likes": self.likes
+        }
 
 
 class Follow(models.Model):
@@ -23,4 +25,9 @@ class Follow(models.Model):
         User, on_delete=CASCADE, related_name='followers')
     follow = models.ForeignKey(User, on_delete=CASCADE, related_name='targets')
 
-    
+
+class Like(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="likeduser")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="likedpost")

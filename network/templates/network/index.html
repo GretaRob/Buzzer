@@ -1,6 +1,11 @@
 {% extends "network/layout.html" %}
-{% load crispy_forms_tags %}
+{% load static %}
 {% block body %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'network/index.js' %}"></script>
+{% endblock %}
+
     <div class="row">
         <div class="col-12 col-md-3 pr-4 dont-move">
             <a href="/"> <h2><img class="img-fluid" width="60" src="">Buzzer</h2></a><br>
@@ -62,49 +67,35 @@
                 <div style="width: 100%; word-break: break-all;">
 
                     <div class="pb-2 row m-0" style="width: 100%; margin-right: 0 !important;">
-                       <div
-                               style="padding-left: 0px !important;"
-                               class="col-8 no-padding d-flex align-items-center">
+                       <div style="padding-left: 0px !important;" class="col-8 no-padding d-flex align-items-center">
                            <a class="mr-2 white-important" href="{% url 'profile' username=post.author %}">
                                {{ post.author }}
                            </a>
                        </div>
-                       <div class="col-4 d-flex flex-row-reverse no-padding align-items-center"
-                            style="padding-right: 0 !important;">
-                           {% if post.author == user %}
-                                <a class="material-icons ml-2"
-                                   style="font-size: 14px"
-                                        href="">clear</a>
-                                <a class="material-icons ml-2"
-                                   style="font-size: 14px"
-                                        href="">update</a>
-                            {%  endif %}
+                       <div class="col-4 d-flex flex-row-reverse no-padding align-items-center" style="padding-right: 0 !important;">
+                            
+                            {% if post.author == user %}
+                                <a class="material-icons ml-2" style="font-size: 14px" href="">clear</a>
+                                <button id="edit" onclick="edit('{{ post.id }}')" class="text-primary">Edit</button>
+                            {%  endif %} 
                        </div>
                    </div>
-                    <div
-                            class="mb-2"
-                            style="width: 100%; height: 1px; background-color: rgba(255, 255, 255, 0.1)"></div>
-                    <a
-                            style="color: rgba(255, 255, 255, 0.5) !important;"
-                            href="">
-                        <p class="mb-4">
-                            {{ post.content }}
-                        </p>
+                    <div class="mb-2" style="width: 100%; height: 1px; background-color: rgba(255, 255, 255, 0.1)"></div>
+                    <a style="color: rgba(255, 255, 255, 0.5) !important;" href="">
+                        <p  id="post-{{post.id}}" class="mb-4"> {{ post.content }} </p> 
+                       <textarea class="form-control mb-2" id="edit-box-{{post.id}}" name="edit-box" style="display:none;"></textarea>
+                        <button id="edit-btn-{{post.id}}" class="btn btn-primary" style="display:none;">Save</button>
                     </a>
-
                         <div class="row">
                             <div class="col-6" style="display: flex;">
                                 <small style="opacity: 0.4;">
-
                                     <!-- Like Button Here -->
-                                    <a href="#" ><i class="fas fa-thumbs-up"></i></a> {{post.likes}}   
-
+                                    <a href="#" id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')" ><i class="fas fa-thumbs-up"></i></a><span id="like-count-{{post.id}}"> {{post.likes}} </span> 
+                                    
                                 </small>
                             </div>
                             <div class="col-6">
-                                <small
-                                        style="opacity: 0.4;"
-                                    class="white-important d-flex full-width flex-row-reverse">
+                                <small style="opacity: 0.4;" class="white-important d-flex full-width flex-row-reverse">
                                     {{ post.date_posted | date:"H:i l, d.m.y" }}
                                 </small>
                             </div>
@@ -149,7 +140,7 @@
             <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    {{ form | crispy }}
+                    {{ form }}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-primary" type="submit">Submit changes</button>
@@ -158,4 +149,8 @@
         </div>
     </div>
 
+
+
+
 {% endblock %}
+

@@ -1,12 +1,14 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from .forms import PostForm
-from .models import Post, User, Follow
+from .models import Post, User, Follow, Like
 
 
 def index(request):
@@ -145,6 +147,40 @@ def following(request):
     }
 
     return render(request, "network/following.html", context)
+
+
+@csrf_exempt
+@login_required
+def edit(request, post_id):
+    # Query for requested post
+    post = Post.objects.get(author=request.user, id=post_id)
+
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        if data.get("content") is not None:
+            post.content = data["content"]
+        post.save()
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def like(request, post_id):
+    post = Post.objects.get(id=post_id)
+
+    if request.method == "GET":
+        return JsonResponse(post.serialize())
+
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        print(data.get("like"))
+        if data.get("like"):
+            Like.objects.create(user=request.user, post=post)
+            post.likes = Like.objects.filter(post=post).count()
+        else:  # unlike
+            Like.objects.filter(user=request.user, post=post).delete()
+            post.likes = Like.objects.filter(post=post).count()
+        post.save()
+        return HttpResponse(status=204)
 
 
 def login_view(request):
