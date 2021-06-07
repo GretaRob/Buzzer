@@ -1,8 +1,12 @@
-function edit(id) {
+function edit(id, post) {
   var edit_box = document.querySelector(`#edit-box-${id}`);
   var edit_btn = document.querySelector(`#edit-btn-${id}`);
   edit_box.style.display = 'block';
   edit_btn.style.display = 'block';
+
+  //prefill composition field
+  
+  
 
   edit_btn.addEventListener('click', () => {
       fetch('/edit/' + id, {

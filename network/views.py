@@ -154,16 +154,19 @@ def following(request):
 def edit(request, post_id):
     # Query for requested post
     post = Post.objects.get(author=request.user, id=post_id)
+    if request.method == "GET":
+        return JsonResponse(post.serialize())
 
     if request.method == "PUT":
         data = json.loads(request.body)
-        if data.get("content") is not None:
-            post.content = data["content"]
+        if data.get("post") is not None:
+            post.content = data["post"]
         post.save()
         return HttpResponse(status=204)
 
 
 @csrf_exempt
+@login_required
 def like(request, post_id):
     post = Post.objects.get(id=post_id)
 
