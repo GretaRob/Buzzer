@@ -31,7 +31,7 @@ function like(id) {
 
   like_btn.addEventListener('click', () => {
 
-      if (like_btn.style.backgroundColor == 'white') {
+      if (like_btn.className == 'fas fa-thumbs-up') {
           fetch('/like/' + id, {
               method: 'PUT',
               body: JSON.stringify({
@@ -39,7 +39,7 @@ function like(id) {
               })
             })
 
-          like_btn.style.backgroundColor = 'red';
+          like_btn.className = 'fas fa-thumbs-down';
             
           fetch('/like/'+ id)
           .then(response => response.json())
@@ -55,7 +55,7 @@ function like(id) {
               })
             });
             
-          like_btn.style.backgroundColor = 'white';
+          like_btn.className = 'fas fa-thumbs-up';
 
           fetch('/like/'+`${id}`)
           .then(response => response.json())

@@ -175,7 +175,7 @@ def like(request, post_id):
 
     if request.method == "PUT":
         data = json.loads(request.body)
-        print(data.get("like"))
+
         if data.get("like"):
             Like.objects.create(user=request.user, post=post)
             post.likes = Like.objects.filter(post=post).count()

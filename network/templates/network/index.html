@@ -18,7 +18,7 @@
                         <i class="far fa-user-circle fa-7x rounded-circle mr-3 img-fluid"></i>
                         <div>
                             <h4 style="text-align: left" class="white-important">
-                                {{ user.username }}
+                                {{ user.username | title }}
                             </h4>
                         </div>
                     </div>
@@ -63,13 +63,13 @@
                     <div class="mb-2" style="width: 100%; height: 1px; background-color: rgba(255, 255, 255, 0.1)"></div>
                         <a style="color: rgba(255, 255, 255, 0.5) !important;" href="">
                         <p  id="post-{{post.id}}" class="mb-4"> {{ post.content }} </p> </a>
-                       <textarea class="form-control mb-2" id="edit-box-{{post.id}}" name="edit-box" style="display:none;"></textarea>
+                        <textarea class="form-control mb-2" id="edit-box-{{post.id}}" name="edit-box" style="display:none;"></textarea>
                         <button id="edit-btn-{{post.id}}" class="btn btn-primary" style="display:none;">Save</button>
                         <div class="row">
                             <div class="col-6" style="display: flex;">
                                 <small style="opacity: 0.4;">
                                     <!-- Like Button Here -->
-                                    <a href="#" id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')" ><i class="fas fa-thumbs-up"></i></a><span id="like-count-{{post.id}}"> {{post.likes}} </span> 
+                                    <a href="#"  ><i  id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')" class="fas fa-thumbs-up" ></i></a><span id="like-count-{{post.id}}"> {{post.likes}} </span> 
                                     
                                 </small>
                             </div>
