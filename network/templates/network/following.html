@@ -1,9 +1,9 @@
 {% extends "network/layout.html" %}
-
+{% load static %}
 {% block body %}
     <div class="row">
         <div class="col-12 col-md-3 pr-4 dont-move">
-            <a href="/"> <h2><img class="img-fluid" width="60" src="">Buzzer</h2></a><br>
+            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'network/bee-logo-1.png' %}">Buzzer</h2></a><br>
             <div class="profile-section">
                 <h3 class="white-important p-2">
                     Your Profile
@@ -121,9 +121,9 @@
           
             </div>
         </div>
-        <!-- Empty Here (put a bigger logo)-->
+        <!--  bigger logo)-->
         <div class="col-12 col-md-3 dont-move">
-
+            <img class="biglogo"  src="{% static 'network/bee-logo-2.png' %}">
         </div>
     </div>
 

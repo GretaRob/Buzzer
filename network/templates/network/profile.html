@@ -1,8 +1,16 @@
 {% extends "network/layout.html" %}
+
+{% load static %}
+
 {% block body %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'network/inbox.js' %}"></script>
+{% endblock %}
+
     <div class="row">
         <div class="col-12 col-md-3 pr-4 dont-move">
-            <a href="/"> <h2><img class="img-fluid" width="60" src="">Buzzer</h2></a><br>
+            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'network/bee-logo-1.png' %}">Buzzer</h2></a><br>
             <div class="profile-section">
             <article class="media content-section">
                 <div class="row full-width pl-2">
@@ -38,8 +46,8 @@
                         <i class="far fa-user-circle fa-7x rounded-circle mr-3 img-fluid"></i>
                         <div>
                             <h4 style="text-align: left" class="white-important">
-                                {{ profileuser.username|title }}<br>has written<br>
-                            <span class="btn-total-follow">{{posts_count}} Posts </span>
+                                {{ profileuser.username|title }}<br><small>has written<br>
+                            <span class="btn-total-follow">{{posts_count}} posts </span></small>
                             </h4>
                         </div>
                     </div>
@@ -167,14 +175,11 @@
           
             </div>
         </div>
-        <!-- Empty Here (put a bigger logo)-->
-        <div class="col-12 col-md-3 dont-move">
-
+        <!-- bigger logo)-->
+        <div class="col-12 col-md-3 dont-move third">
+            <img class="biglogo"  src="{% static 'network/bee-logo-2.png' %}">
         </div>
     </div>
 
 {% endblock %}
 
-{% block script %}
-    <script type="text/javascript" src="{% static 'network/inbox.js' %}"></script>
-{% endblock %}
