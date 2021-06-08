@@ -9,7 +9,7 @@ function edit(id, post) {
   
 
   edit_btn.addEventListener('click', () => {
-      fetch('/edit/' + id, {
+      fetch(`/edit/${id}`, {
           method: 'PUT',
           body: JSON.stringify({
               post: edit_box.value
@@ -32,7 +32,7 @@ function like(id) {
   like_btn.addEventListener('click', () => {
 
       if (like_btn.className == 'fas fa-thumbs-up') {
-          fetch('/like/' + id, {
+          fetch(`/like/${id}`, {
               method: 'PUT',
               body: JSON.stringify({
                   like: true
@@ -41,7 +41,7 @@ function like(id) {
 
           like_btn.className = 'fas fa-thumbs-down';
             
-          fetch('/like/'+ id)
+          fetch(`/like/${id}`)
           .then(response => response.json())
           .then(post => {
               like_ct.innerHTML = post.likes;
@@ -57,7 +57,7 @@ function like(id) {
             
           like_btn.className = 'fas fa-thumbs-up';
 
-          fetch('/like/'+`${id}`)
+          fetch(`/like/${id}`)
           .then(response => response.json())
           .then(post => {
               like_ct.innerHTML = post.likes;
