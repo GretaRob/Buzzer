@@ -186,6 +186,17 @@ def like(request, post_id):
         return HttpResponse(status=204)
 
 
+@csrf_exempt
+@login_required
+def deletepost(request, post_id):
+    post = Post.objects.get(author=request.user, id=post_id)
+
+    if request.method == 'DELETE':
+        post.delete()
+
+    return HttpResponse(status=204)
+
+
 def login_view(request):
     if request.method == "POST":
 

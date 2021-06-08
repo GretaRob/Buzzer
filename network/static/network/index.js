@@ -1,4 +1,4 @@
-function edit(id, post) {
+function edit(id) {
   var edit_box = document.querySelector(`#edit-box-${id}`);
   var edit_btn = document.querySelector(`#edit-btn-${id}`);
   edit_box.style.display = 'block';
@@ -66,4 +66,17 @@ function like(id) {
       return false;
   });
 
+}
+
+function deletepost(id) {
+    fetch(`/deletepost/${id}`, {
+        method: 'DELETE'
+    })
+    .then(() => {
+        window.location.reload();
+    }
+     )
+    .catch(err => {
+       console.error(err)
+     });
 }
