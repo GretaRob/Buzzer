@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Twitter-like social network website for making posts. Registered users can create, edit and delete posts. They can as well follow/unfollow other users and like/unlike posts. Posts are paginated.
+Twitter-like social network website for posting. Registered users can create, edit and delete posts. They can as well follow/unfollow other users and like/unlike posts. Posts are paginated. Website was built using Python, Django framework. Edit, delete and like buttons implemented usiing Javascript to avoid reloading the entire page.
 
 *****
 
