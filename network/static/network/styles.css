@@ -54,8 +54,9 @@ a,
 }
 a:hover,
 #edit:hover,
-.btn-follow:hover {
-  color: #00fbd7;
+.btn-follow:hover,
+.fa-thumbs-up:hover {
+  color: #00fbd7 !important;
   text-underline: none !important;
   cursor: pointer;
 }

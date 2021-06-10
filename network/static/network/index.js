@@ -31,46 +31,46 @@ function edit(id) {
 }
 
 
-function like(id) {
+async function like(id) {
     var like_btn = document.querySelector(`#like-btn-${id}`);
     var like_ct = document.querySelector(`#like-count-${id}`);
   
-    like_btn.addEventListener('click', () => {
+    like_btn.disabled = true;
   
-        if (like_btn.className == 'fas fa-thumbs-up') {
-            fetch(`/like/${id}`, {
+        if (like_btn.style.color == 'grey') {
+            await fetch(`/like/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     like: true
                 })
               })
   
-            like_btn.className = 'fas fa-thumbs-down';
+            like_btn.style.color = 'lightseagreen';
               
-            fetch(`/like/${id}`)
+            await fetch(`/like/${id}`)
             .then(response => response.json())
             .then(post => {
                 like_ct.innerHTML = post.likes;
             });
         }
         else {
-            fetch('/like/' + id, {
+            await fetch('/like/' + id, {
                 method: 'PUT',
                 body: JSON.stringify({
                     like: false
                 })
               });
               
-            like_btn.className = 'fas fa-thumbs-up';
+            like_btn.style.color = 'grey';
   
-            fetch(`/like/${id}`)
+            await fetch(`/like/${id}`)
             .then(response => response.json())
             .then(post => {
                 like_ct.innerHTML = post.likes;
             });
         }
-        return false;
-    });
+        
+
   
   }
 
