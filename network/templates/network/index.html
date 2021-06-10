@@ -55,7 +55,7 @@
                        <div class="col-4 d-flex flex-row-reverse no-padding align-items-center" style="padding-right: 0 !important;">
                             
                             {% if post.author == user %}
-                                <a id="deletepost" onclick="deletepost('{{ post.id }}')" class="material-icons ml-2" style="font-size: 14px">clear</a>
+                                <a id="deletepost" onclick="deletepost('{{ post.id }}')" class="material-icons ml-2" style="font-size: 14px" href="">clear</a>
                                 <a id="edit" onclick="edit('{{ post.id }}')" class="material-icons ml-2" style="font-size: 14px">edit</a>
                             {%  endif %} 
                        </div>
@@ -66,9 +66,9 @@
                         <button id="edit-btn-{{post.id}}" class="btn btn-outline-secondary" style="display:none;">Save</button>
                         <div class="row">
                             <div class="col-6" style="display: flex;">
-                                <small style="opacity: 0.4;">
+                                <small style="opacity: 0.4;" class="like">
                                     <!-- Like Button Here -->
-                                    <a><i  type='button' id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')" class="fas fa-thumbs-up" ></i></a><span id="like-count-{{post.id}}" class="likenumber">  {{post.likes}} </span>    
+                                    <a><i  type='button' id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')" class="fas fa-thumbs-up" ></i></a><span id="like-count-{{post.id}}" class="likenumber">  {{post.likes}} </span>  
                                 </small>
                             </div>
                             <div class="col-6">

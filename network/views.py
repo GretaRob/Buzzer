@@ -13,6 +13,7 @@ from .models import Post, User, Follow, Like
 
 def index(request):
     posts = Post.objects.all()
+    posts = Post.objects.order_by('id').reverse()
     form = PostForm()
     if request.method == 'POST':
         user = User.objects.get(username=request.user)
@@ -132,10 +133,12 @@ def profile(request, username):
 def following(request):
     posts = Post.objects.all()
     currentuser = request.user
+    followers = Follow.objects.filter(follow=currentuser)
     followingposts = []
     for post in posts:
-        if post.author != currentuser:
-            followingposts.append(post)
+        for follow in followers:
+            if follow.target == post.author:
+                followingposts.append(post)
     paginator = Paginator(followingposts, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -158,11 +161,12 @@ def edit(request, post_id):
         return JsonResponse(post.serialize())
 
     if request.method == "PUT":
+
         data = json.loads(request.body)
         if data.get("post") is not None:
             post.content = data["post"]
         post.save()
-        return HttpResponse(status=204)
+        return JsonResponse({}, status=400)
 
 
 @csrf_exempt
