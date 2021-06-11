@@ -18,9 +18,9 @@ Twitter-like social network website for posting. Instead of the tweeting, users 
 
 ## Getting Files
 
-* Click this [link](https://github.com/GretaRob/Network) to access my github repository.
+* Click this [link](https://github.com/GretaRob/Buzzer) to access my github repository.
 
-* On the top panel you will see a green button with a download icon and the word "CODE" written next to it. Click it to download the project zip file.
+* On the top panel you will see a green button with a download icon and the word "Code" written next to it. Click it to download the project zip file.
 
 * Navigate to the download location then extract the zip file to your desired location.
 
@@ -61,8 +61,8 @@ CSS
 
 ## Screenshots  
 
-  ![alt text](https://github.com/GretaRob/Network/blob/main/screenshot1.JPG)
-  ![alt text](https://github.com/GretaRob/Network/blob/main/screenshot2.JPG)
-   ![alt text](https://github.com/GretaRob/Network/blob/main/screenshot3.JPG)
+  ![alt text](https://github.com/GretaRob/Buzzer/blob/main/screenshot1.JPG)
+  ![alt text](https://github.com/GretaRob/Buzzer/blob/main/screenshot2.JPG)
+   ![alt text](https://github.com/GretaRob/Buzzer/blob/main/screenshot3.JPG)
 
 
