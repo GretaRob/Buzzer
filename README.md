@@ -39,7 +39,7 @@ Twitter-like social network website for posting. Instead of the tweeting, users 
 *****
 
 ## Live Link
-Or you can access the web application directly via this [LIVE LINK](https:///).
+Or you can access the web application directly via this [LIVE LINK](https://buzzzerapp.herokuapp.com/).
 
 *****
 
